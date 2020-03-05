@@ -1,0 +1,11 @@
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.exe
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.deps.json
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.runtimeconfig.json
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.runtimeconfig.dev.json
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.dll
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\JsonParser.pdb
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.csprojAssemblyReference.cache
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.AssemblyInfoInputs.cache
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.AssemblyInfo.cs
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.dll
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.pdb
