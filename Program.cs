@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JsonParser
 {
     class Program
     {
+        static Random rand = new Random();
         static void Main(string[] args)
         {
             BinaryTree bt = new BinaryTree(31);
-            bt.AddNode(55);
-            bt.AddNode(44);
-            bt.AddNode(30);
+            for(int i = 0;i<55;i++){
+                bt.AddNode(rand.Next(100));
+            }
             bt.Display();
+            BinaryTree.Node node = bt.Search(44);
+            System.Console.WriteLine(node!=null?"Found":"Not found");
         }
     }
     class BinaryTree
@@ -26,35 +30,27 @@ namespace JsonParser
         {
             root = new Node(value);
         }
-        public void AddNode(int value)  //TODO Fix algorithm 
+        public void AddNode(int value)   
         {
             Node temp = root;
-            int index = 0;
-            while (temp.left != null && temp.right != null)
-            {
-                if (value > temp.value)
-                {
+            while(true){
+                if(temp.value < value){
+                    if(temp.right == null){
+                        temp.right = new Node(value);
+                        //System.Console.WriteLine($"right of {temp.value} : {value}");
+                        return;
+                    }
                     temp = temp.right;
                 }
-                else if (value < temp.value)
-                {
+                else {
+                    if(temp.left == null){
+                        temp.left = new Node(value);
+                        //System.Console.WriteLine($"left of {temp.value} : {value}");
+                        return;
+                    }
                     temp = temp.left;
                 }
-                else return;
-                index++;
             }
-            if (temp.left == null && temp.value > value)
-            {
-                temp.left = new Node(value);
-                Console.WriteLine(value+" left of "+temp.value);
-            }
-            else if(temp.right == null && temp.value < value)
-            {
-                temp.right = new Node(value);
-                Console.WriteLine(value + " right of "+temp.value);
-            }
-            else Console.WriteLine($"{value} got left out" 
-            + $"+ {temp.value}:{temp.left?.value}:{temp.right?.value} at {index}");
         }
         public void Display()
         {
@@ -66,6 +62,21 @@ namespace JsonParser
             Display(temp.left);
             Console.WriteLine(temp.value);
             Display(temp.right);
+        }
+        #nullable enable
+        public Node? Search(int value){
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(root);
+            while(queue.Count > 0){
+                Node temp = queue.Dequeue();
+                if(temp.value == value)return temp;
+                if(temp.left != null)queue.Enqueue(temp.left);
+                if(temp.right != null)queue.Enqueue(temp.right);
+            }
+            return null;
+        }
+        public override string ToString(){  //TODO show binary tree as actual tree
+            return base.ToString();
         }
 
     }
