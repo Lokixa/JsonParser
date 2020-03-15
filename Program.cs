@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JsonParser
 {
@@ -8,44 +10,72 @@ namespace JsonParser
         static Random rand = new Random();
         static void Main(string[] args)
         {
-            BinaryTree bt = new BinaryTree(31);
-            for(int i = 0;i<55;i++){
-                bt.AddNode(rand.Next(100));
-            }
+            #region ActualAppStuff
+            // string sampleJson =
+            //          "[{\"property\":\"value\",\"anotherOne\":74103}]";
+            // List<JsonToken> jsonFile = new List<JsonToken>();
+            // for (int i = 0; i < sampleJson.Length; i++)
+            // {
+            //     switch (sampleJson[i])
+            //     {
+            //         case '{':
+            //             ParseJson(sampleJson, ref i);   //Should return on '}'
+            //             break;
+            //     }
+            // }
+            #endregion
+            BinaryTree bt = new BinaryTree(1);
+            int[] nodes = new int[]{
+                0,2,-2,-1,3
+            };
+            for (int i = 0; i < nodes.Length; i++) bt.AddNode(nodes[i]);
             bt.Display();
-            BinaryTree.Node node = bt.Search(44);
-            System.Console.WriteLine(node!=null?"Found":"Not found");
         }
+    }
+    public class JsonToken
+    {
+        public string id;
+        public object value;
+        public JsonToken(object value, string id = "")
+        {
+            this.id = id;
+            this.value = value;
+        }
+    }
+    public class Node
+    {
+        public int value;
+        public Node left,right;
+        public Node(int value) => this.value = value;
     }
     class BinaryTree
     {
-        public class Node
-        {
-            public int value;
-            public Node left, right;
-            public Node(int value) => this.value = value;
-        }
         public Node root;
         public BinaryTree(int value)
         {
             root = new Node(value);
         }
-        public void AddNode(int value)   
+        public void AddNode(int value)
         {
             Node temp = root;
-            while(true){
-                if(temp.value < value){
-                    if(temp.right == null){
+            while (true)
+            {
+                if (temp.value < value)
+                {
+                    //Go right
+                    if (temp.right == null)
+                    {
                         temp.right = new Node(value);
-                        //System.Console.WriteLine($"right of {temp.value} : {value}");
                         return;
                     }
                     temp = temp.right;
                 }
-                else {
-                    if(temp.left == null){
+                else
+                {
+                    //Go left
+                    if (temp.left == null)
+                    {
                         temp.left = new Node(value);
-                        //System.Console.WriteLine($"left of {temp.value} : {value}");
                         return;
                     }
                     temp = temp.left;
@@ -63,21 +93,19 @@ namespace JsonParser
             Console.WriteLine(temp.value);
             Display(temp.right);
         }
-        #nullable enable
-        public Node? Search(int value){
+#nullable enable
+        public Node? BFS(int value)
+        {
             Queue<Node> queue = new Queue<Node>();
             queue.Enqueue(root);
-            while(queue.Count > 0){
+            while (queue.Count > 0)
+            {
                 Node temp = queue.Dequeue();
-                if(temp.value == value)return temp;
+                if (temp.value == value) return temp;
                 if(temp.left != null)queue.Enqueue(temp.left);
                 if(temp.right != null)queue.Enqueue(temp.right);
             }
             return null;
         }
-        public override string ToString(){  //TODO show binary tree as actual tree
-            return base.ToString();
-        }
-
     }
 }
