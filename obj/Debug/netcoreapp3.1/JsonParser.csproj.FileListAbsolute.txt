@@ -20,3 +20,5 @@ c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.Assemb
 c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.AssemblyInfo.cs
 c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.dll
 c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.pdb
+C:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.csproj.CoreCompileInputs.cache
+C:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.genruntimeconfig.cache
