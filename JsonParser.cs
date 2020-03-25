@@ -4,91 +4,89 @@ using System.Text;
 
 namespace Program.Json
 {
-    public class JsonParser
-    {
-        JsonObject Root { get; set; }
-        readonly string json;
-        
-        public JsonParser(string Json)
-        {
-            json = Json;
-            Parse();
-        }
-        public JsonObject this[string key]
-        {
-            get => Root[key];
-        }
+	public class JsonParser
+	{
+		JsonListObject Root { get; set; }
+		readonly string json;
+		
+		public JsonParser(string Json)
+		{
+			json = Json;
+			Parse();
+		}
+		public JsonObject this[string key]
+		{
+			get => Root[key];
+		}
 
-        #region MainFunction
-        Stack<JsonObject> objectStack = new Stack<JsonObject>();
-        Stack<string> Ids = new Stack<string>();
-        StringBuilder sb = new StringBuilder();
+		#region MainFunction
+		Stack<JsonObject> objectStack = new Stack<JsonObject>();
+		Stack<string> Ids = new Stack<string>();
+		StringBuilder value = new StringBuilder();
+		
+		void Parse()
+		{
+			for (int i = 0; i < json.Length; i++)
+			{
+				if (json[i] == '{' || json[i] == '[')
+				{
+					CreateObject();
+				}
+				else if (json[i] == '}' || json[i] == ']')
+				{
+					CreateObject(); //For last child object
 
-        void Parse()
-        {
-            for (int i = 0; i < json.Length; i++)
-            {
-                if (json[i] == '{' || json[i] == '[')
-                {
-                    OpenObject();
-                }
-                else if (json[i] == '}' || json[i] == ']')
-                {
-                    AddChild();
-                    CloseObject();
-                }
-                else
-                {
-                    if (json[i] == ':')
-                    {
-                        AddId();
-                    }
-                    else if (json[i] == ',')
-                    {
-                        AddChild();
-                    }
-                    else if ((byte)json[i] > 32)
-                    {
-                        sb.Append(json[i]);
-                    }
-                }
-            }
-        }
-        void OpenObject()
-        {
-            if (Ids.Count > 0)
-                objectStack.Push(new JsonObject { Id = Ids.Pop() });
-            else
-                objectStack.Push(new JsonObject());
-        }
-        void CloseObject()
-        {
-            var obj = objectStack.Pop();
+					CloseObject();
+				}
+				else
+				{
+					if (json[i] == ':')
+					{
+						AddId();
+					}
+					else if (json[i] == ',')
+					{
+						CreateObject();
+					}
+					else if ((byte)json[i] > 32)
+					{
+						value.Append(json[i]);
+					}
+				}
+			}
+		}
+		void CloseObject()
+		{
+			var obj = objectStack.Pop();
 
-            if(Root == null)
-            {
-                Root = obj;
-            }
-            else
-            {
-                objectStack.Peek().AddChild(obj);
-            }
-        }
-        void AddChild()
-        {
-            string id = null;
-            if(Ids.Count > 0)
-            {
-                id = Ids.Pop();
-            }
-            objectStack.Peek().AddChild(new JsonObject(id,sb.ToString()));
-            sb.Clear();
-        }
-        void AddId()
-        {
-            Ids.Push(sb.ToString());
-            sb.Clear();
-        }
-        #endregion
-    }
+			if(objectStack.Count > 0)
+			{
+				((JsonListObject)objectStack.Peek()).AddChild(obj);
+			}
+		}
+		void CreateObject()
+		{
+			JsonObject obj = null;
+			//Can refactor to builder pattern.
+			if (value.Length > 0)
+			{
+				obj = new JsonValueObject(value.ToString());
+				value.Clear();
+			}
+			if (Ids.Count > 0)
+			{
+				obj.Id = Ids.Pop();
+			}
+			
+
+			objectStack.Push(obj);
+				
+		}
+		void AddId()
+		{
+			Ids.Push(value.ToString());
+			value.Clear();
+		}
+		#endregion
+	}
 }
