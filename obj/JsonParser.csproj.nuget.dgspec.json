@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\JsonParser.csproj": {}
+    "C:\\Users\\lubas\\source\\repos\\JsonParser\\JsonParser.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\JsonParser.csproj": {
+    "C:\\Users\\lubas\\source\\repos\\JsonParser\\JsonParser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\JsonParser.csproj",
+        "projectUniqueName": "C:\\Users\\lubas\\source\\repos\\JsonParser\\JsonParser.csproj",
         "projectName": "JsonParser",
-        "projectPath": "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\JsonParser.csproj",
-        "packagesPath": "C:\\Users\\lyubaKod\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\obj\\",
+        "projectPath": "C:\\Users\\lubas\\source\\repos\\JsonParser\\JsonParser.csproj",
+        "packagesPath": "C:\\Users\\lubas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lubas\\source\\repos\\JsonParser\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\lyubaKod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lubas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],

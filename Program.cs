@@ -15,7 +15,7 @@ namespace Program
         static void Main(string[] args)
         {
             string json = string.Empty;
-            using (StreamReader sr = new StreamReader(@".\example.json"))
+            using (StreamReader sr = new StreamReader(@"example.json"))
             {
                 json = sr.ReadToEnd();
             }
