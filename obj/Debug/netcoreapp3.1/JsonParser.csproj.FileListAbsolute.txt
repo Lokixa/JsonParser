@@ -22,3 +22,7 @@ c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.dll
 c:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.pdb
 C:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.csproj.CoreCompileInputs.cache
 C:\Users\lubas\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.genruntimeconfig.cache
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.csproj.CoreCompileInputs.cache
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.genruntimeconfig.cache
+C:\Users\lyubaKod\source\repos\JsonParser\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\lyubaKod\source\repos\JsonParser\obj\Debug\netcoreapp3.1\JsonParser.csproj.CopyComplete

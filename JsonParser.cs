@@ -7,7 +7,8 @@ namespace Program.Json
 {
     public class JsonObject
     {
-        List<JsonObject> Children { get; }
+        #region Properties
+        List<JsonObject> Children = new List<JsonObject>();
         string _Id;
         public string Id
         {
@@ -40,7 +41,13 @@ namespace Program.Json
         {
             get => Children.Count;
         }
+        #endregion
 
+        #region Constructors
+        public JsonObject()
+        {
+
+        }
         public JsonObject(string value)
         {
             Value = value;
@@ -59,7 +66,9 @@ namespace Program.Json
             Children = children;
             Id = id;
         }
+        #endregion
 
+        #region Indexers
         public JsonObject this[int index]
         {
             get => Children[index];
@@ -68,7 +77,9 @@ namespace Program.Json
         {
             get => GetObject(key);
         }
+        #endregion
 
+        #region Methods
         public JsonObject GetObject(string key)
         {
             for(int i = 0; i < ChildrenCount; i++)
@@ -82,8 +93,18 @@ namespace Program.Json
             }
             return null;
         }
+        public void AddChild(JsonObject child)
+        {
+            if (child != null)
+            {
+                Children.Add(child);
+            }
+            else
+                throw new ArgumentNullException();
+        }
+        #endregion
 
-        
+        #region Useless
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -110,15 +131,22 @@ namespace Program.Json
             }
             return base.Equals(obj);
         }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
     }
     public class JsonParser
     {
+        #region Properties
         JsonObject Root { get; set; }
-        Stack<List<JsonObject>> objectStack = new Stack<List<JsonObject>>();
-        Stack<string> Ids = new Stack<string>();
-
-        StringBuilder sb = new StringBuilder();
         readonly string json;
+        #endregion
+
+        Stack<JsonObject> objectStack = new Stack<JsonObject>();
+        Stack<string> Ids = new Stack<string>();
+        StringBuilder sb = new StringBuilder();
 
         public JsonParser(string Json)
         {
@@ -130,6 +158,7 @@ namespace Program.Json
             get => Root[key];
         }
 
+        #region Parsing
         void Parse()
         {
             for (int i = 0; i < json.Length; i++)
@@ -140,12 +169,7 @@ namespace Program.Json
                 }
                 else if (json[i] == '}' || json[i] == ']')
                 {
-                    if (Ids.Count != objectStack.Count - 1)
-                    {
-                        AddChild(Ids.Pop());
-                    }
-                    else
-                        AddChild();
+                    AddChild();
                     CloseObject();
                 }
                 else
@@ -167,23 +191,28 @@ namespace Program.Json
         }
         void OpenObject()
         {
-            objectStack.Push(new List<JsonObject>());
+            if (Ids.Count > 0)
+                objectStack.Push(new JsonObject { Id = Ids.Pop() });
+            else
+                objectStack.Push(new JsonObject());
         }
         void CloseObject()
         {
-            var obj = new JsonObject(children: objectStack.Pop());
-
-            if (Ids.Count > 0)
-                obj.Id = Ids.Pop();
+            var obj = objectStack.Pop();
 
             if (objectStack.Count > 0)
-                objectStack.Peek().Add(obj);
+                objectStack.Peek().AddChild(obj);
             else
                 Root = obj;
         }
-        void AddChild(string id = null)
+        void AddChild()
         {
-            objectStack.Peek().Add(new JsonObject(id,sb.ToString()));
+            string id = null;
+            if(Ids.Count > 0)
+            {
+                id = Ids.Pop();
+            }
+            objectStack.Peek().AddChild(new JsonObject(id,sb.ToString()));
             sb.Clear();
         }
         void AddId()
@@ -191,7 +220,6 @@ namespace Program.Json
             Ids.Push(sb.ToString());
             sb.Clear();
         }
-
+        #endregion
     }
-
 }

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "fgy4Eiuh4uFMLSVdpC37vkyp+WMynDOliraJ5WHL8C7+N0qYFwBttmX9B8ATmPR8WbPLjlKOTe+glukl5dIPYA==",
+  "dgSpecHash": "gCZStrIqaGQ6bNMuhp7sfiwAfpllnhWUypSJ1N7zXk8giAlK69hShPZdFg6zh+FqqeD2SeZKuGKAtGQnYK0coA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lubas\\source\\repos\\JsonParser\\JsonParser.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\lyubaKod\\source\\repos\\JsonParser\\JsonParser.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lyubaKod\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

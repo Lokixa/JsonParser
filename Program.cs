@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using Program.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Program
 {
@@ -13,13 +15,14 @@ namespace Program
         static void Main(string[] args)
         {
             string json = string.Empty;
-            using (StreamReader sr = new StreamReader(@"C:\Users\lubas\source\repos\JsonParser\example.json"))
+            using (StreamReader sr = new StreamReader(@".\example.json"))
             {
                 json = sr.ReadToEnd();
             }
+            var newton = JsonConvert.DeserializeObject<JObject>(json);
             JsonParser parser = new JsonParser(json);
-            var a = parser["colors"];
-            Console.WriteLine(a[2]);
+            Console.WriteLine(parser["colors"][3]);
+            //Console.WriteLine(newton["colors"]);
         }
     }
 }
