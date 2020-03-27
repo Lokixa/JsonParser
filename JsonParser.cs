@@ -19,19 +19,23 @@ namespace Program.Json
             {
                 if (json[i] == ']' || json[i] == '}')
                 {
+                    //For last child in object
                     CloseChild();
-                    objects.Pop();
+
+
+                    var obj = objects.Pop();
+
+                    //Assign popped object
+                    if (objects.Count > 0)
+                        objects.Peek().AddChild(obj);
+                    else
+                        Root = obj;
                 }
                 else if (json[i] == '[' || json[i] == '{')
                 {
                     JsonObject obj = new JsonObject();
                     if (Ids.Count > 0)
                         obj.Value = Ids.Pop();
-
-                    if (objects.Count > 0)
-                        objects.Peek().AddChild(obj);
-                    else
-                        Root = obj;
 
                     objects.Push(obj);
                 }

@@ -6,7 +6,7 @@ namespace Program.Json
     public class JsonObject
     {
         public string Value { get; set; }
-        public List<JsonObject> Children { get; set; }
+        public List<JsonObject> Children { get; private set; }
 
         public JsonObject()
         {
@@ -29,7 +29,9 @@ namespace Program.Json
             {
                 foreach(var child in Children)
                 {
+                    //Removes parentheses
                     string normalizedKey = child.Value.Substring(1, child.Value.Length - 2);
+
                     if (normalizedKey == key)
                         return child;
                 }
