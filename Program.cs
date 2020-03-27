@@ -1,11 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using Program.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Program.Json;
+using System;
 
 namespace Program
 {
@@ -14,15 +8,30 @@ namespace Program
         static Random rand = new Random();
         static void Main(string[] args)
         {
-            string json = string.Empty;
-            using (StreamReader sr = new StreamReader(@"C:\Users\lubas\source\repos\JsonParser\example.json"))
-            {
-                json = sr.ReadToEnd();
-            }
-            var newton = JsonConvert.DeserializeObject<JObject>(json);
-            Console.WriteLine(newton["menu"]["popup"]["menuitem"][0]);
-            var lubas = JsonParser.Parse(json);
-            Console.WriteLine(lubas["menu"]["popup"]["menuitem"][0]);            
+            string json = @"{
+              'menu': {
+                'id': 'file',
+                'value': 'File',
+                'popup': {
+                            'menuitem': [
+                              {
+                      'value': 'New',
+                                'onclick': 'CreateDoc()'
+                    },
+                    {
+                      'value': 'Open',
+                      'onclick': 'OpenDoc()'
+                    },
+                    {
+                      'value': 'Save',
+                      'onclick': 'SaveDoc()'
+                    }
+                  ]
+                }
+              }
+            }  ";
+            var parsedJson = JsonParser.Parse(json);
+            Console.WriteLine(parsedJson["menu"]["popup"]["menuitem"][2]);
         }
     }
 }

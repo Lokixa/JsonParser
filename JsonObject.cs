@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Program.Json;
 
 namespace Program.Json
 {
@@ -31,7 +29,8 @@ namespace Program.Json
             {
                 foreach(var child in Children)
                 {
-                    if (child.Value == key)
+                    string normalizedKey = child.Value.Substring(1, child.Value.Length - 2);
+                    if (normalizedKey == key)
                         return child;
                 }
             }
@@ -49,8 +48,7 @@ namespace Program.Json
         {
             get
             {
-                string _key = $"\"{key}\"";
-                return FindObject(_key);
+                return FindObject(key);
             }
         }
         public override string ToString()
