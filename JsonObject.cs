@@ -5,28 +5,67 @@ using Program.Json;
 
 namespace Program.Json
 {
-    public abstract class JsonObject
+    public class JsonObject
     {
-        string _Id;
-        public string Id
+        public string Value { get; set; }
+        public List<JsonObject> Children { get; set; }
+
+        public JsonObject()
         {
-            get => _Id;
-            set
+            //Used for a minimal replacement of the builder pattern
+        }
+        public JsonObject(string value)
+        {
+            Value = value;
+        }
+        
+        public void AddChild(JsonObject child)
+        {
+            if (Children == null) Children = new List<JsonObject>();
+            Children.Add(child);
+        }
+
+        JsonObject FindObject(string key)
+        {
+            if(Children != null)
             {
-                if (_Id == null)
+                foreach(var child in Children)
                 {
-                    _Id = value;
+                    if (child.Value == key)
+                        return child;
                 }
+            }
+            return null;
+        }
+
+        public JsonObject this[int index]
+        {
+            get
+            {
+                return Children?[index];
+            }
+        }
+        public JsonObject this[string key]
+        {
+            get
+            {
+                string _key = $"\"{key}\"";
+                return FindObject(_key);
             }
         }
         public override string ToString()
         {
-            if (Id != null)
+            string toReturn = string.Empty;
+            if (Children != null)
             {
-                return $"Id : {Id} ";
+                toReturn = $"[{string.Join(",", Children)}]";
+                if (Value != null)
+                    toReturn = $"{Value}:" + toReturn;
             }
-
-            return base.ToString();
+            else if (Value != null)
+                toReturn = Value;
+            return toReturn;
         }
+
     }
 }

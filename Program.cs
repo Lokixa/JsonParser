@@ -15,14 +15,14 @@ namespace Program
         static void Main(string[] args)
         {
             string json = string.Empty;
-            using (StreamReader sr = new StreamReader(@"example.json"))
+            using (StreamReader sr = new StreamReader(@"C:\Users\lubas\source\repos\JsonParser\example.json"))
             {
                 json = sr.ReadToEnd();
             }
             var newton = JsonConvert.DeserializeObject<JObject>(json);
-            JsonParser parser = new JsonParser(json);
-            Console.WriteLine(parser["colors"][3]);
-            //Console.WriteLine(newton["colors"]);
+            Console.WriteLine(newton["menu"]["popup"]["menuitem"][0]);
+            var lubas = JsonParser.Parse(json);
+            Console.WriteLine(lubas["menu"]["popup"]["menuitem"][0]);            
         }
     }
 }
