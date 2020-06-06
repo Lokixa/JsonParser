@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Program.Json
+namespace JsonDeserializerLib
 {
     public class JsonObject
     {
@@ -16,7 +16,7 @@ namespace Program.Json
         {
             Value = value;
         }
-        
+
         public void AddChild(JsonObject child)
         {
             if (Children == null) Children = new List<JsonObject>();
@@ -25,9 +25,9 @@ namespace Program.Json
 
         JsonObject FindObject(string key)
         {
-            if(Children != null)
+            if (Children != null)
             {
-                foreach(var child in Children)
+                foreach (var child in Children)
                 {
                     //Removes parentheses
                     string normalizedKey = child.Value.Substring(1, child.Value.Length - 2);
