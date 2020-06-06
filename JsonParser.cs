@@ -48,7 +48,7 @@ namespace JsonDeserializerLib
                     Ids.Push(value.ToString());
                     value.Clear();
                 }
-                else if ((byte)json[i] > 32)
+                else if (value.Length > 0 || (byte)json[i] > 32)
                 {
                     value.Append(json[i]);
                 }
